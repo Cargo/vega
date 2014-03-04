@@ -88,8 +88,7 @@ Design.Project = {
 
 		// Set scroll event
 		Design.Project.$container
-			.bind("scroll", Design.Project.onScroll)
-			.bind("touchmove", Design.Project.onScroll);
+			.bind("scroll", Design.Project.onScroll);
 
 		// Thumbnail scroll
 		Design.Project.$thumbcontainer
@@ -181,7 +180,13 @@ Design.Project = {
 
 				// Scroll it
 				if (!Design.Project.data.thumb_click) {
-					Design.Project.$thumbcontainer.scrollTop(top);
+					if(Cargo.Helper.isIOS()){
+						Design.Project.$thumbcontainer.animate({
+							scrollTop: top
+						});
+					} else {
+						Design.Project.$thumbcontainer.scrollTop(top);
+					}
 				}
 
 				break;
@@ -216,6 +221,12 @@ Design.Project = {
 		var click_timeout;
 
 		$("#project_thumbnails").on("click dblclick", ".project_thumb", function(e) {
+
+			if (e.metaKey || e.ctrlKey) {
+				var purl = Cargo.Helper.GetPurlFromPid($(this).attr("data-id"));
+	            window.open(Cargo.Helper.MakeDirectLinkFromPurl(purl));
+	        }
+
 			// Scroll to the project
 			if (!$(this).hasClass("active")) {
 				Design.Project.scrollToProject($(this).attr("data-id"));
@@ -312,4 +323,8 @@ Cargo.Event.on("pagination_complete", function(new_page) {
 
 Cargo.Event.on("inspector_unload", function() {
 	Design.Project.formatThumbnails();
+});
+
+Cargo.Event.on("fullscreen_destroy_hotkeys", function() {
+    Design.keyboardshortcuts();
 });

@@ -20,6 +20,14 @@ body.disable_scroll {
 	overflow: hidden;
 }
 
+.project_thumb, .project_content {
+	-webkit-transform: translatez(0);
+    -moz-transform: translatez(0);
+    -ms-transform: translatez(0);
+    -o-transform: translatez(0);
+    transform: translatez(0);
+}
+
 /**
  * Header image and header text
  */
@@ -1112,7 +1120,6 @@ a#fullscreen:active {
 #autopaginate_loader_feed .retinaSpinner {
 	padding: 0 70px;
 	margin: 35px auto;
-	width: 905px;
 }
 
 #autopaginate_loader_thumbs {
