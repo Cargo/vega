@@ -255,7 +255,7 @@ Design.Project = {
 		}
 
 		// Browser
-		var $scroll_target = $("body");
+		var $scroll_target = $("body, html");
 		if (typeof InstallTrigger !== "undefined") {
 			$scroll_target = $("html");
 		}
