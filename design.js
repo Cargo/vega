@@ -256,18 +256,16 @@ Design.Project = {
 
 		// Browser
 		var $scroll_target = $("body, html");
+
 		if (typeof InstallTrigger !== "undefined") {
 			$scroll_target = $("html");
 		}
 
-		// Scroll to
-		$scroll_target.animate({
-			scrollTop: current_position
-		}, 0, function() {
-			$scroll_target.animate({
-				scrollTop: new_position
-			}, 100);
-		});
+		// scroll to project
+		$scroll_target.scrollTop(current_position).animate({
+			scrollTop: new_position
+		}, 100);
+
 	}
 };
 
